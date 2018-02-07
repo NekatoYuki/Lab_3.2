@@ -5,6 +5,8 @@ public class Merge_Partition
 	{
 		String list1[] = {"a","c","e","f","h","u"};  //list1 
 		String list2[] = {"b","d","g","i","j","l"};  //list2
+		String merge[] = Merge_Partition.merge(list1, list2);
+	}
 
 	public static String[] merge(String[] list1, String[] list2)
 	{
@@ -39,10 +41,9 @@ public class Merge_Partition
 				m++;
 			}
 		}
-		return merge;
 	}
 }
-}
+
 /*	public static int partition(int[] list)
 	{
 		int pivot = list[0];

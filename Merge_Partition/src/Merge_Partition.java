@@ -1,3 +1,4 @@
+import java.util.Arrays;
 
 public class Merge_Partition
 {
@@ -5,7 +6,15 @@ public class Merge_Partition
 	{
 		String list1[] = {"a","c","e","f","h","u"};  //list1 
 		String list2[] = {"b","d","g","i","j","l"};  //list2
-		String merge[] = Merge_Partition.merge(list1, list2);
+		int [] test3 = {3,4,2,7,12,22,0,1};
+		
+		
+		long start = System.nanoTime();
+		String merge[] = merge(list1, list2);
+		long end = System.nanoTime();
+		long time = end - start;
+		System.out.println("Merge test took: " + time  + "nanoseconds");
+		System.out.println(Arrays.toString(merge));
 	}
 
 	public static String[] merge(String[] list1, String[] list2)
@@ -41,12 +50,6 @@ public class Merge_Partition
 				m++;
 			}
 		}
-	}
-}
-
-/*	public static int partition(int[] list)
-	{
-		int pivot = list[0];
-		while (list[0])
+		return merge;
 	}
 }

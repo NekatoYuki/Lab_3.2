@@ -15,6 +15,14 @@ public class Merge_Partition
 		long time = end - start;
 		System.out.println("Merge test took: " + time  + "nanoseconds");
 		System.out.println(Arrays.toString(merge));
+		
+		start = System.nanoTime();
+		int pivotFinalPos = partition(test3);
+		end = System.nanoTime();
+		time = end - start;
+		System.out.println("Partition test took: " + time + "nanoseconds");
+		System.out.println("Final Pivot Position: " + pivotFinalPos);
+		System.out.println(Arrays.toString(test3));
 	}
 
 	public static String[] merge(String[] list1, String[] list2)
@@ -23,7 +31,7 @@ public class Merge_Partition
 		int i = 0; //index of list 1
 		int j = 0; //index of list 2
 		int m = 0; //index of string merge
-		while (i <= list1.length && j <= list2.length && m<=list1.length+list2.length) //for as long as index m = 0 and length of string merge is less than the sum of list1 and list2 increment m up by 1
+		while (m<=list1.length+list2.length) //for as long as index m = 0 and length of string merge is less than the sum of list1 and list2 increment m up by 1
 		{ //lists all conditionals for when to assign each list index to the string index
 			if ((list1[i].compareTo(list2[j])==1) || (list1[i].compareTo(list2[j])==0))
 			{
@@ -35,24 +43,11 @@ public class Merge_Partition
 				merge[m]=list1[i];
 				i++;
 			}
-			if (i==list1.length)
-			{
-				for (int two = j; j <list2.length; two++)
-				{
-					merge[m]=list2[two];
-				}
-			 }
-			if (j==list2.length)
-			{
-				for (int one = i; i <list1.length; one++)
-				{
-					merge[m]=list1[one];
-				}
-			}
 			m++;
 		}
 		return merge;
 	}
+
 	
 /*	public static int Partition (int[] list3)
 	{

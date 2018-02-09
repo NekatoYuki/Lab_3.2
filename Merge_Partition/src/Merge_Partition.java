@@ -23,33 +23,39 @@ public class Merge_Partition
 		int i = 0; //index of list 1
 		int j = 0; //index of list 2
 		int m = 0; //index of string merge
-		for (m=0; m < list1.length+list2.length; m++) //for as long as index m = 0 and length of string merge is less than the sum of list1 and list2 increment m up by 1
+		while (i <= list1.length && j <= list2.length && m<=list1.length+list2.length) //for as long as index m = 0 and length of string merge is less than the sum of list1 and list2 increment m up by 1
 		{ //lists all conditionals for when to assign each list index to the string index
-			if (i==list1.length)
+			if ((list1[i].compareTo(list2[j])==1) || (list1[i].compareTo(list2[j])==0))
 			{
-				list2[j]=merge[m];
+				merge[m]=list2[j];
 				j++;
-				m++;
-			}
-			else if (j==list2.length)
-			{
-				list1[i]=merge[m];
-				i++;
-				m++;
-			}
-			else if ((list1[i].compareTo(list2[j])==1) || (list1[i].compareTo(list2[j])==0))
-			{
-				list2[j]=merge[m];
-				j++;
-				m++;
 			}
 			else if (list1[i].compareTo(list2[j])==-1)
 			{
-				list1[i]=merge[m];
+				merge[m]=list1[i];
 				i++;
-				m++;
 			}
+			if (i==list1.length)
+			{
+				for (int two = j; j <list2.length; two++)
+				{
+					merge[m]=list2[two];
+				}
+			 }
+			if (j==list2.length)
+			{
+				for (int one = i; i <list1.length; one++)
+				{
+					merge[m]=list1[one];
+				}
+			}
+			m++;
 		}
 		return merge;
 	}
+	
+/*	public static int Partition (int[] list3)
+	{
+		
+	}*/
 }

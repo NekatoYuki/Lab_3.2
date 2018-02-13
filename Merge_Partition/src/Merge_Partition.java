@@ -49,8 +49,24 @@ public class Merge_Partition
 	}
 
 	
-/*	public static int Partition (int[] list3)
+	public static int Partition (int[] list3)
 	{
-		
-	}*/
+			int pivot = list3[front]; //set pivot as front of list1
+			int x = front -1; // x = front pivot -1
+			int y = back +1; //y = back pivot +1
+			while ( x < y) //for as long as the the two pivot points haven't crossed
+			{
+				for (x++; list3[x] < pivot; x++); //increment x by 1
+				for (y--; list3[y] > pivot; y--); //increment y by 1
+				{
+					if (x < y) //if x is less than y
+					{
+						int temp = list3[x]; //swap method
+						list3[x] = list3[y];
+						list3[y] = temp;
+					}
+				}
+			}
+			return y;
+		}
 }

@@ -17,7 +17,7 @@ public class Merge_Partition
 		System.out.println(Arrays.toString(merge));
 		
 		start = System.nanoTime();
-		int pivotFinalPos = partition(test3);
+		int pivotFinalPos = Partition(test3);
 		end = System.nanoTime();
 		time = end - start;
 		System.out.println("Partition test took: " + time + "nanoseconds");
@@ -31,19 +31,35 @@ public class Merge_Partition
 		int i = 0; //index of list 1
 		int j = 0; //index of list 2
 		int m = 0; //index of string merge
-		while (m<=list1.length+list2.length) //for as long as index m = 0 and length of string merge is less than the sum of list1 and list2 increment m up by 1
+		while ( i < list1.length && j < list2.length && m < merge.length)
 		{ //lists all conditionals for when to assign each list index to the string index
-			if ((list1[i].compareTo(list2[j])==1) || (list1[i].compareTo(list2[j])==0))
-			{
-				merge[m]=list2[j];
-				j++;
-			}
-			else if (list1[i].compareTo(list2[j])==-1)
+			if (list1[i].compareTo(list2[j]) <= 0)
 			{
 				merge[m]=list1[i];
+				j++;
+			}
+			else if (list1[i].compareTo(list2[j]) > 0)
+			{
+				merge[m]=list2[j];
 				i++;
 			}
 			m++;
+		}
+		if (j == list2.length)
+		{
+			for (int x = i; x < list1.length; x++)
+			{
+				merge[m] = list1[x];
+				m++;
+			}
+		}
+		if (i == list1.length)
+		{
+			for (int y =j; y < list2.length; y++)
+			{
+				merge[m] = list2[j];
+				m++;
+			}
 		}
 		return merge;
 	}
@@ -51,22 +67,27 @@ public class Merge_Partition
 	
 	public static int Partition (int[] list3)
 	{
-			int pivot = list3[front]; //set pivot as front of list1
-			int x = front -1; // x = front pivot -1
-			int y = back +1; //y = back pivot +1
-			while ( x < y) //for as long as the the two pivot points haven't crossed
+			int front = 0;
+			int pivot = list3[front]; 
+			int back =list3.length-1; 
+			for (int i = 1; i < list3.length; i++)
 			{
-				for (x++; list3[x] < pivot; x++); //increment x by 1
-				for (y--; list3[y] > pivot; y--); //increment y by 1
+				if (list3[i] <= pivot)
 				{
-					if (x < y) //if x is less than y
-					{
-						int temp = list3[x]; //swap method
-						list3[x] = list3[y];
-						list3[y] = temp;
-					}
+					int temp = list3[front]; //swap method
+					list3[front] = list3[back];
+					list3[back] = temp;
+					front = i;
+				}
+				else if (list3[i] > pivot && back > i)
+				{
+					int temp = list3[front]; //swap method
+					list3[front] = list3[back];
+					list3[back] = temp;
+					back--;
+					i--;
 				}
 			}
-			return y;
+			return front;
 		}
 }
